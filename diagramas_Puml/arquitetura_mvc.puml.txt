@@ -1,0 +1,46 @@
+@startuml
+title Arquitetura do Sistema - Padrão MVC
+
+skinparam componentStyle rectangle
+
+package "Camada de Apresentação (View)" {
+    [Menu Principal]
+    [Tela Login]
+    [Tela Reserva]
+    [Tela Cadastro Passageiro]
+    [Tela Cadastro Voo]
+}
+
+package "Camada de Controle (Controller)" {
+    [ControladorLogin]
+    [ControladorReserva]
+    [ControladorCadastro]
+}
+
+package "Camada de Modelo (Model)" {
+    [Passageiro]
+    [Tripulante]
+    [Voo]
+    [Assento]
+    [Reserva]
+    [ProgramaFidelidade]
+}
+
+' Relações entre camadas
+[Menu Principal] --> [ControladorLogin]
+[Tela Login] --> [ControladorLogin]
+[Tela Reserva] --> [ControladorReserva]
+[Tela Cadastro Passageiro] --> [ControladorCadastro]
+[Tela Cadastro Voo] --> [ControladorCadastro]
+
+[ControladorLogin] --> [Passageiro]
+[ControladorReserva] --> [Reserva]
+[ControladorReserva] --> [Voo]
+[ControladorReserva] --> [Assento]
+[ControladorCadastro] --> [Passageiro]
+[ControladorCadastro] --> [Tripulante]
+[ControladorCadastro] --> [Voo]
+[ControladorCadastro] --> [Assento]
+
+[Reserva] --> [ProgramaFidelidade] : atualiza pontos
+@enduml

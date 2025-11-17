@@ -1,0 +1,17 @@
+@startuml
+title Diagrama de Comunicação - UC-11 Programa de Fidelidade
+
+class Passageiro
+class TelaFidelidade
+class ControladorFidelidade
+class Sistema
+class ProgramaFidelidade
+
+Passageiro - TelaFidelidade : 1. consultarPontos()
+TelaFidelidade - ControladorFidelidade : 2. solicitarPontos(passageiro)
+ControladorFidelidade - Sistema : 3. recuperarPontos()
+Sistema - ProgramaFidelidade : 4. obterSaldo()
+ProgramaFidelidade - Sistema : 5. saldoAtualizado
+Sistema - ControladorFidelidade : 6. pontosAtualizados
+ControladorFidelidade - TelaFidelidade : 7. exibirPontos()
+@enduml

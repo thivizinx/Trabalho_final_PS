@@ -1,0 +1,87 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+title Modelo de Dados - Sistema de Gerenciamento de Aeroporto
+
+package "Banco de Dados" {
+    entity "Passageiro" as tbPassageiro {
+        * id : INT (PK)
+        nome : VARCHAR(100)
+        cpf : VARCHAR(14)
+        pontos_fidelidade : INT
+    }
+
+    entity "Tripulante" as tbTripulante {
+        * id : INT (PK)
+        nome : VARCHAR(100)
+        funcao : VARCHAR(50)
+    }
+
+    entity "Voo" as tbVoo {
+        * id : INT (PK)
+        codigo : VARCHAR(10)
+        origem : VARCHAR(50)
+        destino : VARCHAR(50)
+        horario : DATETIME
+    }
+
+    entity "Assento" as tbAssento {
+        * id : INT (PK)
+        numero : VARCHAR(5)
+        reservado : BOOLEAN
+        voo_id : INT (FK)
+    }
+
+    entity "Reserva" as tbReserva {
+        * id : INT (PK)
+        passageiro_id : INT (FK)
+        voo_id : INT (FK)
+        assento_id : INT (FK)
+    }
+}
+
+package "Objetos (Classes)" {
+    class Passageiro {
+        - nome : String
+        - cpf : String
+        - pontosFidelidade : int
+    }
+
+    class Tripulante {
+        - nome : String
+        - funcao : String
+    }
+
+    class Voo {
+        - codigo : String
+        - origem : String
+        - destino : String
+        - horario : String
+    }
+
+    class Assento {
+        - numero : String
+        - reservado : boolean
+    }
+
+    class Reserva {
+        - passageiro : Passageiro
+        - voo : Voo
+        - assento : Assento
+    }
+}
+
+' Mapeamento entre classes e tabelas
+Passageiro -- tbPassageiro : ORM
+Tripulante -- tbTripulante : ORM
+Voo -- tbVoo : ORM
+Assento -- tbAssento : ORM
+Reserva -- tbReserva : ORM
+
+' Relacionamentos no banco
+tbPassageiro ||--o{ tbReserva : "passageiro_id"
+tbVoo ||--o{ tbReserva : "voo_id"
+tbAssento ||--o{ tbReserva : "assento_id"
+tbVoo ||--o{ tbAssento : "voo_id"
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+title Diagrama de Componentes e Implantação - Sistema Aeroporto
+
+skinparam componentStyle rectangle
+
+' ---------------- COMPONENTES ----------------
+package "Sistema de Gerenciamento de Aeroporto" {
+    component "Interface Console" as UI
+    component "ControladorLogin" as CtrlLogin
+    component "ControladorReserva" as CtrlReserva
+    component "ControladorCadastro" as CtrlCadastro
+    component "Modelo Passageiro" as MPassageiro
+    component "Modelo Tripulante" as MTripulante
+    component "Modelo Voo" as MVoo
+    component "Modelo Assento" as MAssento
+    component "Modelo Reserva" as MReserva
+    component "Programa Fidelidade" as MFidelidade
+}
+
+UI --> CtrlLogin
+UI --> CtrlReserva
+UI --> CtrlCadastro
+
+CtrlLogin --> MPassageiro
+CtrlReserva --> MReserva
+CtrlReserva --> MVoo
+CtrlReserva --> MAssento
+CtrlCadastro --> MPassageiro
+CtrlCadastro --> MTripulante
+CtrlCadastro --> MVoo
+CtrlCadastro --> MAssento
+
+MReserva --> MFidelidade : atualiza pontos
+
+' ---------------- IMPLANTAÇÃO ----------------
+node "Servidor Aplicação" as Servidor {
+    component "Aplicação Java" as App
+}
+
+node "Cliente" as Cliente {
+    component "Terminal do Usuário" as Terminal
+}
+
+node "Banco de Dados (opcional)" as Banco {
+    component "Persistência em Memória" as DB
+}
+
+Terminal --> App : interação via console
+App --> DB : leitura/escrita
+@enduml

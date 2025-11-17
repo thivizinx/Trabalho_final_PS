@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' Classes principais
+class Passageiro {
+    - nome : String
+    - cpf : String
+    - pontosFidelidade : int
+    + getNome() : String
+    + getCpf() : String
+    + adicionarPontos(pontos : int) : void
+}
+
+class Tripulante {
+    - nome : String
+    - funcao : String
+    + getNome() : String
+    + getFuncao() : String
+}
+
+class Voo {
+    - codigo : String
+    - origem : String
+    - destino : String
+    - horario : String
+    - assentos : List<Assento>
+    + getCodigo() : String
+    + getOrigem() : String
+    + getDestino() : String
+    + getHorario() : String
+    + adicionarAssento(assento : Assento) : void
+}
+
+class Assento {
+    - numero : String
+    - reservado : boolean
+    + getNumero() : String
+    + isReservado() : boolean
+    + reservar() : void
+}
+
+class Reserva {
+    - passageiro : Passageiro
+    - voo : Voo
+    - assento : Assento
+    + confirmar() : void
+    + cancelar() : void
+}
+
+' Relacionamentos
+Passageiro "1" -- "0..*" Reserva
+Reserva "1" -- "1" Voo
+Reserva "1" -- "1" Assento
+Voo "1" -- "0..*" Assento
+Tripulante "0..*" -- "0..*" Voo : atuaEm
+@enduml

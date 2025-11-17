@@ -1,0 +1,20 @@
+@startuml
+title Diagrama de Sequência - UC-01 Cadastrar Passageiro
+
+actor Administrador
+boundary "TelaCadastroPassageiro" as telaCadastro
+control "ControladorCadastro" as ctrlCadastro
+entity "Sistema" as sistema
+entity "Passageiro" as passageiro
+
+Administrador -> telaCadastro : solicitarCadastroPassageiro()
+telaCadastro -> ctrlCadastro : enviarDadosPassageiro(nome, cpf, email)
+ctrlCadastro -> sistema : validarDadosPassageiro()
+sistema --> ctrlCadastro : dados válidos
+ctrlCadastro -> passageiro : criarObjetoPassageiro()
+passageiro --> ctrlCadastro : objeto criado
+ctrlCadastro -> sistema : salvarPassageiro()
+sistema --> ctrlCadastro : confirmação
+ctrlCadastro -> telaCadastro : exibirMensagemSucesso()
+telaCadastro --> Administrador : cadastro concluído
+@enduml

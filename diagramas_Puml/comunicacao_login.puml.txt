@@ -1,0 +1,14 @@
+@startuml
+title Diagrama de Comunicação - UC-00 Fazer Login
+
+class Usuario
+class TelaLogin
+class ControladorLogin
+class Sistema
+
+Usuario - TelaLogin : 1. informarCredenciais()
+TelaLogin - ControladorLogin : 2. validarLogin(usuario, senha)
+ControladorLogin - Sistema : 3. verificarCredenciais()
+Sistema - ControladorLogin : 4. resultadoLogin()
+ControladorLogin - TelaLogin : 5. exibirResultado()
+@enduml

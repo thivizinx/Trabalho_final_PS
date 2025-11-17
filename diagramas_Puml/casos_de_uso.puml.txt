@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Usuário" as Usuario
+actor "Administrador" as Admin
+actor "Passageiro" as Pass
+actor "Tripulante" as Trip
+
+Usuario <|-- Admin
+Usuario <|-- Pass
+Usuario <|-- Trip
+
+rectangle "Sistema de Gerenciamento de Aeroporto" {
+    usecase "UC-00\nFazer Login" as UC00
+    usecase "UC-01\nCadastrar Passageiro" as UC01
+    usecase "UC-02\nCadastrar Tripulante" as UC02
+    usecase "UC-03\nCadastrar Voo" as UC03
+    usecase "UC-04\nCadastrar Assentos" as UC04
+    usecase "UC-05\nListar Passageiros" as UC05
+    usecase "UC-06\nListar Tripulação" as UC06
+    usecase "UC-07\nListar Voos" as UC07
+    usecase "UC-08\nListar Assentos" as UC08
+    usecase "UC-09\nFazer Reserva" as UC09
+    usecase "UC-10\nBaixa em Reserva" as UC10
+    usecase "UC-11\nPrograma de Fidelidade" as UC11
+}
+
+' Relações dos atores com os casos de uso
+Usuario --> UC00
+
+Admin --> UC01
+Admin --> UC02
+Admin --> UC03
+Admin --> UC04
+Admin --> UC05
+Admin --> UC06
+Admin --> UC07
+Admin --> UC08
+Admin --> UC09
+Admin --> UC10
+Admin --> UC11
+
+Pass --> UC09
+Pass --> UC11
+
+Trip --> UC06
+
+' Relações de include
+UC09 --> UC07 : <<include>>
+UC09 --> UC08 : <<include>>
+
+' Relações de extend
+UC11 ..> UC09 : <<extend>>
+UC10 ..> UC09 : <<extend>>
+@enduml

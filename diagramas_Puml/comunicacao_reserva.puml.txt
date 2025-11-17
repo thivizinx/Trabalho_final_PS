@@ -1,0 +1,27 @@
+@startuml
+title Diagrama de Comunicação - UC-09 Fazer Reserva
+
+class Passageiro
+class TelaReserva
+class ControladorReserva
+class Sistema
+class Voo
+class Assento
+class Reserva
+
+Passageiro - TelaReserva : 1. solicitarReserva()
+TelaReserva - ControladorReserva : 2. iniciarReserva()
+ControladorReserva - Sistema : 3. listarVoosDisponiveis()
+Sistema - ControladorReserva : 4. listaVoos
+ControladorReserva - TelaReserva : 5. exibirVoos()
+Passageiro - TelaReserva : 6. escolherVoo()
+TelaReserva - ControladorReserva : 7. selecionarVoo(voo)
+ControladorReserva - Sistema : 8. listarAssentosDisponiveis(voo)
+Sistema - ControladorReserva : 9. listaAssentos
+ControladorReserva - TelaReserva : 10. exibirAssentos()
+Passageiro - TelaReserva : 11. escolherAssento()
+TelaReserva - ControladorReserva : 12. confirmarReserva(passageiro, voo, assento)
+ControladorReserva - Sistema : 13. registrarReserva()
+Sistema - ControladorReserva : 14. confirmação
+ControladorReserva - TelaReserva : 15. exibirConfirmação()
+@enduml

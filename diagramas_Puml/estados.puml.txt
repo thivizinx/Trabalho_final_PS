@@ -1,0 +1,24 @@
+@startuml
+title Diagrama de Estados - Ciclo de Vida da Reserva
+
+[*] --> CriandoReserva : iniciar processo
+
+state CriandoReserva {
+    [*] --> SelecionandoVoo
+    SelecionandoVoo --> SelecionandoAssento : voo escolhido
+    SelecionandoAssento --> ConfirmandoReserva : assento escolhido
+}
+
+ConfirmandoReserva --> ReservaConfirmada : dados válidos
+ConfirmandoReserva --> Cancelada : erro ou desistência
+
+ReservaConfirmada --> EmCheckIn : passageiro realiza check-in
+EmCheckIn --> Embarcado : passageiro embarca no voo
+Embarcado --> Concluida : voo finalizado
+
+ReservaConfirmada --> Cancelada : cancelamento antes do embarque
+EmCheckIn --> Cancelada : cancelamento antes do embarque
+
+Cancelada --> [*]
+Concluida --> [*]
+@enduml

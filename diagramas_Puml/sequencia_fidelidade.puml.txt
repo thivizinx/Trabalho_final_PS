@@ -1,0 +1,64 @@
+@startuml
+title Diagrama de Sequência - UC-00 Fazer Login
+actor Usuario
+boundary "Tela Login" as UI
+control "ControladorLogin" as Ctrl
+entity "Sistema" as Sys
+
+Usuario -> UI : Informar credenciais
+UI -> Ctrl : validarLogin(usuario, senha)
+Ctrl -> Sys : verificarCredenciais(usuario, senha)
+Sys --> Ctrl : resultado (válido ou inválido)
+Ctrl --> UI : exibirResultadoLogin
+UI --> Usuario : acesso concedido ou negado
+
+
+' -------------------------------------------------------------
+
+
+title Diagrama de Sequência - UC-09 Fazer Reserva
+actor Passageiro
+boundary "Tela Reserva" as UI
+control "ControladorReserva" as Ctrl
+entity "Sistema" as Sys
+
+Passageiro -> UI : Solicitar reserva
+UI -> Ctrl : iniciarReserva()
+Ctrl -> Sys : listarVoosDisponiveis()  <<include>>
+Sys --> Ctrl : listaVoos
+Ctrl -> UI : exibirVoos()
+Passageiro -> UI : escolherVoo
+UI -> Ctrl : selecionarVoo(voo)
+Ctrl -> Sys : listarAssentosDisponiveis(voo) <<include>>
+Sys --> Ctrl : listaAssentos
+Ctrl -> UI : exibirAssentos()
+Passageiro -> UI : escolherAssento
+UI -> Ctrl : confirmarReserva(passageiro, voo, assento)
+Ctrl -> Sys : registrarReserva()
+Sys --> Ctrl : confirmação
+Ctrl --> UI : exibirConfirmação
+UI --> Passageiro : Reserva concluída
+
+
+' -------------------------------------------------------------
+
+
+title Diagrama de Sequência - UC-11 Programa de Fidelidade (<<extend>>)
+actor Passageiro
+boundary "Tela Fidelidade" as UI
+control "ControladorFidelidade" as Ctrl
+entity "Sistema" as Sys
+
+Passageiro -> UI : Consultar pontos
+UI -> Ctrl : solicitarPontos(passageiro)
+Ctrl -> Sys : recuperarPontos(passageiro)
+Sys --> Ctrl : pontosAtualizados
+Ctrl --> UI : exibirPontos
+UI --> Passageiro : mostrar saldo de pontos
+
+' Extensão após reserva
+note right of Ctrl
+<<extend>> UC-09 Fazer Reserva
+Acumular pontos após reserva concluída
+end note
+@enduml

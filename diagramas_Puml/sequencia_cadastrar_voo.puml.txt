@@ -1,0 +1,20 @@
+@startuml
+title Diagrama de Sequência - UC-03 Cadastrar Voo
+
+actor Administrador
+boundary "TelaCadastroVoo" as telaVoo
+control "ControladorCadastro" as ctrlCadastro
+entity "Sistema" as sistema
+entity "Voo" as voo
+
+Administrador -> telaVoo : solicitarCadastroVoo()
+telaVoo -> ctrlCadastro : enviarDadosVoo(origem, destino, data, hora)
+ctrlCadastro -> sistema : validarDadosVoo()
+sistema --> ctrlCadastro : dados válidos
+ctrlCadastro -> voo : criarObjetoVoo()
+voo --> ctrlCadastro : objeto criado
+ctrlCadastro -> sistema : salvarVoo()
+sistema --> ctrlCadastro : confirmação
+ctrlCadastro -> telaVoo : exibirMensagemSucesso()
+telaVoo --> Administrador : cadastro concluído
+@enduml
