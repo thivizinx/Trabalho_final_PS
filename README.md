@@ -68,7 +68,7 @@ Exibe a estrutura do sistema baseada no padrão MVC.
 
 ### **Diagrama de Componentes e Implantação**
 Mostra os componentes do sistema e sua alocação nos nós de execução.
-![Diagrama de Componentes e Implantação](./diagramas/componentes_implantacao.png)
+![Diagrama de Componentes e Implantação](./diagramas/componentes_implantaçao.png)
 
 ---
 
