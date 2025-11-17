@@ -41,11 +41,11 @@ Representa os atores (Usuário, Administrador, Passageiro, Tripulante) e suas in
 ### **Diagramas de Sequência**
 Mostram o fluxo de mensagens entre os objetos para realizar operações específicas.
 
-- **UC-00 Fazer Login**
-![Diagrama de Sequência - Login](./diagramas/sequencia_login.png)
+- **UC-01 Cadastrar Passageiro**
+![Diagrama de Sequência - Login](./diagramas/sequencia_cadastrar_passageiro.png)
 
-- **UC-09 Fazer Reserva**
-![Diagrama de Sequência - Reserva](./diagramas/sequencia_reserva.png)
+- **UC-09 Cadastrar VÔOS**
+![Diagrama de Sequência - Reserva](./diagramas/sequencia_cadastrar_voos.png)
 
 - **UC-11 Programa de Fidelidade**
 ![Diagrama de Sequência - Fidelidade](./diagramas/sequencia_fidelidade.png)
